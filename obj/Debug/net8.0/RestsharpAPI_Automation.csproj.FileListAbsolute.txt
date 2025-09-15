@@ -122,3 +122,4 @@ D:\RestsharpAPI_Automation\bin\Debug\net8.0\Reqnroll.dll
 D:\RestsharpAPI_Automation\bin\Debug\net8.0\System.Threading.Channels.dll
 D:\RestsharpAPI_Automation\bin\Debug\net8.0\Reqnroll.NUnit.ReqnrollPlugin.dll
 D:\RestsharpAPI_Automation\obj\Debug\net8.0\RestsharpAPI_Automation.sourcelink.json
+D:\RestsharpAPI_Automation\bin\Debug\net8.0\appsettings.json

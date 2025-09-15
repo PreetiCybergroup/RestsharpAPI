@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using Reqnroll;
 using RestSharp;
 using RestsharpAPI_Automation.Clients;
+using RestsharpAPI_Automation.Config;
 using RestsharpAPI_Automation.Models;
 
 namespace RestsharpAPI_Automation.StepDefinitions
@@ -15,12 +16,16 @@ namespace RestsharpAPI_Automation.StepDefinitions
         public UserClient? _client;
         private RestResponse? _response;
         private string? _endpoint;
+        ConfigReader _config;
 
 
         [Given("I set the API endpoint to {string}")]
         public void GivenISetTheAPIEndpointTo(string endpoint)
         {
-            _client = new UserClient(endpoint);
+           var config = ConfigReader.LoadConfig();
+            string BaseUrl = config.BaseUrl.ToString();
+           // config.BaseUrl
+            _client = new UserClient(BaseUrl);
             //_client = new RestClient();
            // _endpoint = endpoint;
         }

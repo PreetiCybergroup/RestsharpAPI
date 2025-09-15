@@ -105,18 +105,28 @@ namespace RestsharpAPI_Automation.Features
         
         private static global::Reqnroll.Formatters.RuntimeSupport.FeatureLevelCucumberMessages InitializeCucumberMessages()
         {
-            return new global::Reqnroll.Formatters.RuntimeSupport.FeatureLevelCucumberMessages("Features/UserDetails.feature", 3);
+            return new global::Reqnroll.Formatters.RuntimeSupport.FeatureLevelCucumberMessages("Features/UserDetails.feature", 4);
         }
         
         [global::NUnit.Framework.TestAttribute()]
         [global::NUnit.Framework.DescriptionAttribute("Verify user details by ID")]
         [global::NUnit.Framework.CategoryAttribute("tag1")]
-        public async global::System.Threading.Tasks.Task VerifyUserDetailsByID()
+        [global::NUnit.Framework.TestCaseAttribute("https://jsonplaceholder.typicode.com", "1", "Leanne Graham", "0", null)]
+        [global::NUnit.Framework.TestCaseAttribute("https://jsonplaceholder.typicode.com", "2", "Ervin Howell", "1", null)]
+        public async global::System.Threading.Tasks.Task VerifyUserDetailsByID(string baseUrl, string userId, string expectedName, string @__pickleIndex, string[] exampleTags)
         {
-            string[] tagsOfScenario = new string[] {
+            string[] @__tags = new string[] {
                     "tag1"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
-            string pickleIndex = "0";
+            argumentsOfScenario.Add("BaseUrl", baseUrl);
+            argumentsOfScenario.Add("UserId", userId);
+            argumentsOfScenario.Add("ExpectedName", expectedName);
+            string pickleIndex = @__pickleIndex;
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Verify user details by ID", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
@@ -131,16 +141,16 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
             {
                 await this.ScenarioStartAsync();
 #line 7
- await testRunner.GivenAsync("I set the API endpoint to \"https://jsonplaceholder.typicode.com/\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+ await testRunner.GivenAsync(string.Format("I set the API endpoint to \"{0}\"", baseUrl), ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
 #line 8
- await testRunner.WhenAsync("I send a get request for User ID 1", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+ await testRunner.WhenAsync(string.Format("I send a get request for User ID {0}", userId), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 9
  await testRunner.ThenAsync("The response status should be 200", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
 #line 10
- await testRunner.AndAsync("the response should contain \"Leanne Graham\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+ await testRunner.AndAsync(string.Format("the response should contain \"{0}\"", expectedName), ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
