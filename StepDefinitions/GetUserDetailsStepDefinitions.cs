@@ -1,8 +1,10 @@
 using System;
 using FluentAssertions;
+using Newtonsoft.Json;
 using Reqnroll;
 using RestSharp;
 using RestsharpAPI_Automation.Clients;
+using RestsharpAPI_Automation.Models;
 
 namespace RestsharpAPI_Automation.StepDefinitions
 {
@@ -36,9 +38,14 @@ namespace RestsharpAPI_Automation.StepDefinitions
         }
 
         [Then("the response should contain {string}")]
-        public void ThenTheResponseShouldContain(string expectedContent)
+        public void ThenTheResponseShouldContain(string expectedName)
         {
-            _response?.Content.Should().Contain(expectedContent);
+            var user = JsonConvert.DeserializeObject<UserResponse>(_response.Content);
+            user.Should().NotBeNull();
+            user.name.Should().Be(expectedName);
+            TestContext.WriteLine(user.name);
+            TestContext.WriteLine("testing API");
+            // Console.Write(user.name);
         }
     }
 }
