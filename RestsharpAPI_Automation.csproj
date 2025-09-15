@@ -32,7 +32,6 @@
   <ItemGroup>
     <Folder Include="Features\" />
     <Folder Include="Hooks\" />
-    <Folder Include="Clients\" />
     <Folder Include="Drivers\" />
     <Folder Include="Config\" />
     <Folder Include="Extensions\" />

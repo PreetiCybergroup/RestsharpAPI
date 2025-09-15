@@ -2,6 +2,7 @@ using System;
 using FluentAssertions;
 using Reqnroll;
 using RestSharp;
+using RestsharpAPI_Automation.Clients;
 
 namespace RestsharpAPI_Automation.StepDefinitions
 {
@@ -9,7 +10,7 @@ namespace RestsharpAPI_Automation.StepDefinitions
     [Binding]
     public class GetUserDetailsStepDefinitions
     {
-        private RestClient? _client;
+        public UserClient? _client;
         private RestResponse? _response;
         private string? _endpoint;
 
@@ -17,15 +18,15 @@ namespace RestsharpAPI_Automation.StepDefinitions
         [Given("I set the API endpoint to {string}")]
         public void GivenISetTheAPIEndpointTo(string endpoint)
         {
-            _client = new RestClient();
-            _endpoint = endpoint;
+            _client = new UserClient(endpoint);
+            //_client = new RestClient();
+           // _endpoint = endpoint;
         }
 
-        [When("I send a get request")]
-        public void WhenISendAGetRequest()
+        [When("I send a get request for User ID {int}")]
+        public void WhenISendAGetRequestForUserID(int userId)
         {
-            var request = new RestRequest(_endpoint, Method.Get);
-            _response = _client?.Execute(request);
+            _response = _client?.GetUserByID(userId);
         }
 
         [Then("The response status should be {int}")]
